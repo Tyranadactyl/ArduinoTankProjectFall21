@@ -1,4 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "Tank Files\\arduinoTestFile.ino"
+    "sketch": "Tank Files\\arduinoTestFile.ino",
+    "port": "COM3"
 }
