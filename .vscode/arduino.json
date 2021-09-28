@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
-    "sketch": "Tank Files\\arduinoTestFile.ino",
+    "sketch": "Tank Files\\BlinkProgram\\BlinkProgram.ino",
     "port": "COM3"
 }
