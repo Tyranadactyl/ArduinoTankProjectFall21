@@ -6,7 +6,7 @@ void setup(){
 }
 
 void loop(){
-    int delayPeriod = 250;
+    int delayPeriod = 200;
     digitalWrite(ledPin, HIGH);
     Serial.println("Light's on");
     delay(delayPeriod);
