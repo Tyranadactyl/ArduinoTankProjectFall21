@@ -1,5 +1,5 @@
 {
     "board": "arduino:avr:uno",
     "port": "/dev/cu.usbmodem14301",
-    "sketch": "Tank Files/BlinkProgram.ino"
+    "sketch": "Tank Files/arduinioTank.ino"
 }
