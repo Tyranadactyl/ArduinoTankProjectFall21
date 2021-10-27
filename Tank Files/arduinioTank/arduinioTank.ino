@@ -52,7 +52,7 @@ void loop() {
 
       digitalWrite(motor2pin1, LOW);
       digitalWrite(motor2pin2, HIGH);
-      delay(1250);
+      delay(250);
     }
 
     if(data == '/') {
