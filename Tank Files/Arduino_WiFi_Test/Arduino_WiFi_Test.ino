@@ -44,13 +44,71 @@ void loop() {
     Serial.print("we have connection!");
     String currentLine = "";
     while (client.connected()) {
+      
       if (client.available()) {
+        
         char input = client.read();
         Serial.write(input);
         if (input == '\n') {
           
+          if (currentLine.length() == 0) {
+            
+            client.println("HTTP/1.1 200 OK");
+            client.println("Content-type:text/html");
+            client.println();
+            client.print("Click <a href=\"/F\">here</a> move forward<br>");
+            client.print("Click <a href=\"/B\">here</a> move backwards<br>");
+            client.print("Click <a href=\"/L\">here</a> move left<br>");
+            client.print("Click <a href=\"/R\">here</a> move right<br>");
+            client.print("Click <a href=\"/S\">here</a> stop<br>");
+            client.println();
+            break;
+          } 
+          else {
+            currentLine = "";
+          }
+        }
+        else if (c != '\r') {
+          currentLine += c;
+        }
+        //Move forward
+        if (currentLine.endsWith("GET /F")) {
+          digitalWrite(RF, HIGH);
+          digitalWrite(RR, LOW);
+          digitalWrite(LF, HIGH);
+          digitalWrite(LR, LOW);
+        }
+        //Back up
+        if (currentLine.endsWith("GET /B")) {
+          digitalWrite(RF, LOW);
+          digitalWrite(RR, HIGH);
+          digitalWrite(LF, LOW);
+          digitalWrite(LR, HIGH);
+        }
+        //Turn left
+        if (currentLine.endsWith("GET /L")) {
+          digitalWrite(RF, HIGH);
+          digitalWrite(RR, LOW);
+          digitalWrite(LF, LOW);
+          digitalWrite(LR, HIGH);
+        }
+        //Turn right
+        if (currentLine.endsWith("GET /R")) {
+          digitalWrite(RF, LOW);
+          digitalWrite(RR, HIGH);
+          digitalWrite(LF, HIGH);
+          digitalWrite(LR, LOW);
+        }
+        //Stop
+        if (currentLine.endsWith("GET /S")) {
+          digitalWrite(RF, LOW);
+          digitalWrite(RR, LOW);
+          digitalWrite(LF, LOW);
+          digitalWrite(LR, LOW);
         }
       }
     }
+    client.stop();
+    Serial.println("connection terminated");
   }
 }
