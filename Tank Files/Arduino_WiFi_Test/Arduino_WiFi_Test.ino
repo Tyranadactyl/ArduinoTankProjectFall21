@@ -1,5 +1,5 @@
-#include<SPI.h>
-#include<WiFiNINA.h>
+#include <SPI.h>
+#include <WiFiNINA.h>
 
 //Establish variables for ease of use
 //R/L (Right/Left) F/R (Forward/Reverse)
@@ -12,8 +12,8 @@ const int LR = 6;
 int connectionStatus = WL_IDLE_STATUS;
 
 //Variables for network id and password
-char ssid[] = //network SSID;
-char pass[] = //network password;
+char ssid[] = "ssid";
+char pass[] = "password";
 
 // server is a WiFi server to be hosted on port 80
 WiFiServer server(80);
@@ -29,22 +29,23 @@ void setup() {
   pinMode(LR, OUTPUT);
 
   //Check firmware
-  if (WiFi.firmwareVersion() < WIFI_FIRMWARE_LATEST_VERSION) {
-    Serial.print("Firmware needs an update.");
-  }
+  //if (WiFi.firmwareVersion() < WIFI_FIRMWARE_LATEST_VERSION) {
+    //Serial.print("Firmware needs an update.");
+  //}
 
   //While not connected, repeatedly attempt to connect to the network
   while (connectionStatus != WL_CONNECTED) {
-    Serial.print("Connecting to" + ssid + "...");
-    connection = WiFi.begin(ssid, pass);
-    delay(5000); //5 sec delay before trying again
+    Serial.print("Connecting to ");
+    Serial.println(ssid);
+    connectionStatus = WiFi.begin(ssid, pass);
+    delay(10000); //5 sec delay before trying again
   }
 
   //Start the server
   server.begin();
 
   //Print the servers IP address
-  Serial.print("The boards IP is:");
+  Serial.print("The boards IP is: ");
   Serial.println(WiFi.localIP());
 }
 
@@ -82,12 +83,12 @@ void loop() {
             currentLine = "";
           }
         }
-        //if 
-        else if (c != '\r') {
-          currentLine += c;
+        else if (input != '\r') {
+          currentLine += input;
         }
         //Move forward
         if (currentLine.endsWith("GET /F")) {
+          Serial.print("Recieving F");
           digitalWrite(RF, HIGH);
           digitalWrite(RR, LOW);
           digitalWrite(LF, HIGH);
@@ -95,6 +96,7 @@ void loop() {
         }
         //Back up
         if (currentLine.endsWith("GET /B")) {
+          Serial.print("Recieving B");
           digitalWrite(RF, LOW);
           digitalWrite(RR, HIGH);
           digitalWrite(LF, LOW);
@@ -102,6 +104,7 @@ void loop() {
         }
         //Turn left
         if (currentLine.endsWith("GET /L")) {
+          Serial.print("Recieving L");
           digitalWrite(RF, HIGH);
           digitalWrite(RR, LOW);
           digitalWrite(LF, LOW);
@@ -109,6 +112,7 @@ void loop() {
         }
         //Turn right
         if (currentLine.endsWith("GET /R")) {
+          Serial.print("Recieving R");
           digitalWrite(RF, LOW);
           digitalWrite(RR, HIGH);
           digitalWrite(LF, HIGH);
@@ -116,6 +120,7 @@ void loop() {
         }
         //Stop
         if (currentLine.endsWith("GET /S")) {
+          Serial.print("Recieving S");
           digitalWrite(RF, LOW);
           digitalWrite(RR, LOW);
           digitalWrite(LF, LOW);
