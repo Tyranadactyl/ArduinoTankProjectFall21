@@ -12,8 +12,8 @@ const int LR = 6;
 int connectionStatus = WL_IDLE_STATUS;
 
 //Variables for network id and password
-char ssid[] = "ssid";
-char pass[] = "password";
+char ssid[] = "Draco";
+char pass[] = "123456789";
 
 // server is a WiFi server to be hosted on port 80
 WiFiServer server(80);
