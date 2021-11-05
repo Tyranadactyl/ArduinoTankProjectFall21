@@ -3,10 +3,10 @@
 
 //Establish variables for ease of use
 //R/L (Right/Left) F/R (Forward/Reverse)
-const int RF = 3;
-const int RR = 4;
-const int LF = 5;
-const int LR = 6;
+const int RF = 2;
+const int RR = 3;
+const int LF = 4;
+const int LR = 5;
 
 //set default connection status
 int connectionStatus = WL_IDLE_STATUS;
