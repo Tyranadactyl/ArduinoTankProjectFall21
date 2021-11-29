@@ -12,8 +12,8 @@ const int LR = 5;
 int connectionStatus = WL_IDLE_STATUS;
 
 //Variables for network id and password
-char ssid[] = "ssid";
-char pass[] = "password";
+char ssid[] = "NETGEARe84";
+char pass[] = "Tinkerbe11";
 
 // server is a WiFi server to be hosted on port 80
 WiFiServer server(80);
@@ -55,7 +55,7 @@ void loop() {
 
   //once there is a client, print to the serial monitor
   if (client) {
-    Serial.print("we have connection!");
+    Serial.print("we have connection!\n");
     
     //'currentLine' will store the incoming data from the client
     String currentLine = "";
@@ -70,7 +70,7 @@ void loop() {
         char input = client.read();
         
         //write the data on the serial monitor
-        Serial.write("Recieving: " + input);
+        Serial.write(input);
         
         //if the client hasn't sent data, display the webpage
         if (input == '\n') {
@@ -135,17 +135,17 @@ void loop() {
           digitalWrite(LF, LOW);
           digitalWrite(LR, LOW);
         }
-        //If the tank looses wifi connection, make it stop moving
-        if (WiFi.status() != WL_CONNECTED){
-          digitalWrite(RF, LOW);
-          digitalWrite(RR, LOW);
-          digitalWrite(LF, LOW);
-          digitalWrite(LR, LOW);
-        }
       }
     }
     //remove the client
     client.stop();
     Serial.println("connection terminated");
+  }
+  //If the tank looses wifi connection, make it stop moving
+  if (WiFi.status() != WL_CONNECTED){
+    digitalWrite(RF, LOW);
+    digitalWrite(RR, LOW);
+    digitalWrite(LF, LOW);
+    digitalWrite(LR, LOW);
   }
 }
