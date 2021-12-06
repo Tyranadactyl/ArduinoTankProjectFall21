@@ -12,8 +12,8 @@ const int LR = 5;
 int connectionStatus = WL_IDLE_STATUS;
 
 //Variables for network id and password
-char ssid[] = "NETGEARe84";
-char pass[] = "Tinkerbe11";
+char ssid[] = "Wireless Router";
+char pass[] = "arduinoTank";
 
 // server is a WiFi server to be hosted on port 80
 WiFiServer server(80);
